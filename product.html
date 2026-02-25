@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="common.css" />
+<link rel="stylesheet" href="product.css"/>
+
+<title>Product - Sunspectrum Enterprises</title>
+</head>
+
+<body>
+
+<header>
+<div class="logo-container">
+<img src="./images/logo/sunspectrum-enterprises-logo.png" class="logo" alt="Sunspectrum Enterprises" />
+<span class="brand-name">Sunspectrum Enterprises</span>
+</div>
+
+<!-- Mobile Navigation -->
+<div class="menu-wrapper">
+<button class="hamburger">☰</button>
+<nav class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="faq.html">FAQ</a>
+<a href="tel:+919689435397">Call</a>
+<a href="https://wa.me/918329298004">WhatsApp</a>
+<a href="https://maps.app.goo.gl/EAXRKwYfNcxUNZA88">Location</a>
+</nav>
+</div>
+</header>
+
+<!-- Product Layout: Left side slider, Right side product info -->
+<div class="product-layout">
+
+<div class="left">
+<div class="slider-wrapper">
+<button class="nav prev">&#10094;</button>
+<div class="slider" id="slider"></div>
+<button class="nav next">&#10095;</button>
+</div>
+<div class="dots" id="dots"></div>
+</div>
+
+<div class="right">
+<div class="product">
+<h2 id="title"></h2>
+<p id="desc"></p>
+<ul class="specs" id="specs"></ul>
+<a id="enquiryBtn" class="enquiry-btn" target="_blank">📞 Enquire on WhatsApp</a>
+<a id="photosBtn" class="photos-btn" target="_blank">📸 Request More Photos/Videos</a>
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Sunspectrum Enterprises — all rights reserved</p>
+<p style="font-size: 0.85rem; margin-top: 6px">sales · service · since 2010</p>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/918329298004" class="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+
+<script>
+const WHATSAPP = "918329298004";
+
+// Product database - contains all product information and media files
+const products = {
+  // Water Softener
+  softener: {
+    title: "Water Softener",
+    desc: "Hard water treatment system for homes and apartments.",
+    specs: [
+      "Removes hardness from water",
+      "Reduces scale on taps & geysers",
+      "Low maintenance",
+      "Suitable for villas & apartments",
+      "Available in multiple capacities"
+    ],
+    media: [
+      { type: "image", src: "images/products/water-softener/water-softener-system.webp" }
+    ]
+  },
+  
+  // RO Plant
+  ro: {
+    title: "RO Plant",
+    desc: "Domestic and commercial RO systems.",
+    specs: [
+      "Multi-stage purification",
+      "High TDS reduction",
+      "Food grade tanks",
+      "Wall & floor mount",
+      "Commercial options available"
+    ],
+    media: [
+      { type: "image", src: "images/products/ro-plant/commercial-ro-plant.webp" },
+      { type: "image", src: "images/products/ro-plant/commercial-ro-plant-1.webp" },
+      { type: "image", src: "images/products/ro-plant/commercial-ro-plant-2.webp" },
+      { type: "image", src: "images/products/ro-plant/commercial-ro-plant-3.webp" },
+      { type: "image", src: "images/products/ro-plant/commercial-ro-plant-4.webp" },
+      { type: "video", src: "images/products/ro-plant/commercial-ro-plant-video-1.mp4" },
+      { type: "video", src: "images/products/ro-plant/commercial-ro-plant-video-2.mp4" },
+      { type: "video", src: "images/products/ro-plant/commercial-ro-plant-video-3.mp4" },
+      { type: "video", src: "images/products/ro-plant/commercial-ro-plant-video-4.mp4" }
+    ]
+  },
+  
+  // Solar Water Heater
+  solar: {
+    title: "Solar Water Heater",
+    desc: "Residential and commercial solar heaters.",
+    specs: [
+      "High efficiency collectors",
+      "ISI certified tanks",
+      "Low power usage",
+      "Long life",
+      "Multiple litre options"
+    ],
+    media: [
+      { type: "image", src: "images/products/solar-water-heater/solar-water-heater-system.webp" },
+      { type: "image", src: "images/products/solar-water-heater/solar-water-heater-1.webp" },
+      { type: "image", src: "images/products/solar-water-heater/solar-water-heater-2.webp" },
+      { type: "image", src: "images/products/solar-water-heater/solar-water-heater-3.webp" },
+      { type: "video", src: "images/products/solar-water-heater/solar-water-heater-video-1.mp4" }
+    ]
+  },
+  
+  // Commercial Water Softener
+  commercial: {
+    title: "Commercial Water Softener",
+    desc: "Industrial & hotel water softening solutions.",
+    specs: [
+      "High flow rate",
+      "For hotels & industries",
+      "Automatic regeneration",
+      "Durable FRP tanks",
+      "Low salt consumption"
+    ],
+    media: [
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-1.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-2.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-3.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-4.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-5.webp" },
+      { type: "image", src: "images/products/commercial-water-softener/commercial-water-softener-6.webp" },
+      { type: "video", src: "images/products/commercial-water-softener/commercial-water-softener-video-1.mp4" },
+      { type: "video", src: "images/products/commercial-water-softener/commercial-water-softener-video-2.mp4" },
+      { type: "video", src: "images/products/commercial-water-softener/commercial-water-softener-video-3.mp4" }
+    ]
+  },
+  
+  // Heat Pump
+  heatpump: {
+    title: "Heat Pump",
+    desc: "Energy efficient hot water solution.",
+    specs: [
+      "Cuts electricity cost by 70%",
+      "Works in all weather",
+      "Eco-friendly refrigerant",
+      "Compact design",
+      "5 year warranty"
+    ],
+    media: [
+      { type: "image", src: "images/products/heat-pump/heat-pump-water-heater.webp" },
+      { type: "image", src: "images/products/heat-pump/heat-pump-1.webp" },
+      { type: "image", src: "images/products/heat-pump/heat-pump-2.webp" },
+      { type: "image", src: "images/products/heat-pump/heat-pump-3.webp" },
+      { type: "image", src: "images/products/heat-pump/heat-pump-4.webp" },
+      { type: "image", src: "images/products/heat-pump/heat-pump-5.webp" },
+      { type: "video", src: "images/products/heat-pump/heat-pump-video-1.mp4" },
+      { type: "video", src: "images/products/heat-pump/heat-pump-video-2.mp4" }
+    ]
+  },
+  
+  // Solar Panels
+  panel: {
+    title: "Solar Panels",
+    desc: "On-grid and off-grid solar solutions.",
+    specs: [
+      "High efficiency mono perc cells",
+      "25 year performance warranty",
+      "Available from 3kW to 100kW",
+      "Net metering support",
+      "Government subsidy eligible"
+    ],
+    media: [
+      { type: "image", src: "images/products/solar-panels/rooftop-solar-panel.webp" }
+    ]
+  },
+  
+  // Water Purifier
+  purifier: {
+    title: "Water Purifier",
+    desc: "Advanced drinking water systems.",
+    specs: [
+      "RO + UV + UF technology",
+      "TDS controller",
+      "Copper/zinc mineralization",
+      "Wall mount design",
+      "Yearly maintenance contract"
+    ],
+    media: [
+      { type: "image", src: "images/products/purifier/domestic-water-purifier.webp" },
+      { type: "video", src: "images/products/purifier/water-purifier-video-1.mp4" }
+    ]
+  },
+  
+  // Solar Pump
+  pump: {
+    title: "Solar Pump Set",
+    desc: "Agricultural solar pumping solutions.",
+    specs: [
+      "No electricity bills",
+      "Available from 2HP to 20HP",
+      "AC/DC options",
+      "Automatic start/stop",
+      "5 year pump warranty"
+    ],
+    media: [
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-agriculture.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-1.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-2.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-3.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-4.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-5.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-6.webp" },
+      { type: "image", src: "images/products/solar-pump/solar-pump-set-7.webp" }
+    ]
+  }
+};
+
+// Get product from URL parameter
+const params = new URLSearchParams(location.search);
+const item = params.get("item");
+
+// Redirect if product not found
+if (!products[item]) {
+  window.location.href = "index.html";
+}
+
+const data = products[item];
+
+// Set product info
+document.getElementById("title").innerText = data.title;
+document.getElementById("desc").innerText = data.desc;
+
+const specs = document.getElementById("specs");
+specs.innerHTML = "";
+data.specs.forEach(s => {
+  const li = document.createElement("li");
+  li.innerText = s;
+  specs.appendChild(li);
+});
+
+// Setup slider
+const slider = document.getElementById("slider");
+const dots = document.getElementById("dots");
+slider.innerHTML = "";
+dots.innerHTML = "";
+
+let index = 0;
+
+// Helper function to create image/video slides
+function createMediaSlide(media, i) {
+  const slide = document.createElement("div");
+  slide.className = "slide";
+  
+  if (media.type === "image") {
+    // Image slide
+    slide.style.backgroundImage = `url(${media.src})`;
+    
+    const img = document.createElement("img");
+    img.src = media.src;
+    img.alt = `${data.title} - Image ${i + 1}`;
+    img.loading = "lazy";
+    img.onerror = function() {
+      this.parentElement.style.background = "#f1f5f9";
+      this.style.display = "none";
+      
+      // Add error message
+      const errorMsg = document.createElement("div");
+      errorMsg.style.position = "absolute";
+      errorMsg.style.top = "50%";
+      errorMsg.style.left = "50%";
+      errorMsg.style.transform = "translate(-50%, -50%)";
+      errorMsg.style.color = "#64748b";
+      errorMsg.innerText = "Image not found";
+      slide.appendChild(errorMsg);
+    };
+    slide.appendChild(img);
+    
+    // Add photo badge
+    const badge = document.createElement("span");
+    badge.className = "media-badge";
+    badge.innerText = "Photo";
+    slide.appendChild(badge);
+    
+  } else if (media.type === "video") {
+    // Video slide
+    slide.style.background = "#0b1120";
+    
+    const video = document.createElement("video");
+    video.src = media.src;
+    video.controls = true;
+    video.preload = "metadata";
+    video.style.width = "100%";
+    video.style.height = "100%";
+    video.style.objectFit = "contain";
+    
+    // Add play button overlay (will be hidden when video plays)
+    const playButton = document.createElement("div");
+    playButton.className = "play-button";
+    playButton.innerHTML = "▶";
+    playButton.onclick = function(e) {
+      e.stopPropagation();
+      video.play();
+      this.style.display = "none";
+    };
+    
+    video.onplay = function() {
+      playButton.style.display = "none";
+    };
+    
+    video.onpause = function() {
+      playButton.style.display = "flex";
+    };
+    
+    video.onended = function() {
+      playButton.style.display = "flex";
+    };
+    
+    slide.appendChild(video);
+    slide.appendChild(playButton);
+    
+    // Add video badge
+    const badge = document.createElement("span");
+    badge.className = "media-badge video";
+    badge.innerText = "Video";
+    slide.appendChild(badge);
+  }
+  
+  return slide;
+}
+
+// Handle case with no media
+if (!data.media || data.media.length === 0) {
+  const slide = document.createElement("div");
+  slide.className = "slide";
+  slide.style.background = "#f1f5f9";
+  slide.innerHTML = '<div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#64748b;">No images available</div>';
+  slider.appendChild(slide);
+} else {
+  data.media.forEach((media, i) => {
+    const slide = createMediaSlide(media, i);
+    slider.appendChild(slide);
+
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dot.onclick = () => go(i);
+    dots.appendChild(dot);
+  });
+}
+
+const total = slider.children.length;
+
+// Update slider position
+function update() {
+  slider.style.transform = `translateX(-${index * 100}%)`;
+  // Pause all videos when sliding
+  document.querySelectorAll("video").forEach(v => v.pause());
+  document.querySelectorAll(".play-button").forEach(b => b.style.display = "flex");
+  document.querySelectorAll(".dots span").forEach((d, i) => {
+    d.classList.toggle("active", i === index);
+  });
+}
+
+function go(i) {
+  index = i;
+  update();
+}
+
+// Only add navigation if more than one slide
+if (total > 1) {
+  document.querySelector(".next").onclick = () => {
+    index = (index + 1) % total;
+    update();
+  };
+
+  document.querySelector(".prev").onclick = () => {
+    index = (index - 1 + total) % total;
+    update();
+  };
+
+  // Touch events for mobile
+  let startX = 0;
+  slider.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) index = (index + 1) % total;
+    if (endX - startX > 50) index = (index - 1 + total) % total;
+    update();
+  });
+}
+
+// WhatsApp buttons
+const msg = `Hello, I'm interested in ${data.title}. Please share price and details.`;
+document.getElementById("enquiryBtn").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+const photoMsg = `Hello, can you send more photos of ${data.title}?`;
+document.getElementById("photosBtn").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(photoMsg)}`;
+
+// Mobile menu functionality
+const hamburger = document.querySelector(".hamburger");
+const menu = document.getElementById("mobileMenu");
+
+hamburger.onclick = e => {
+  e.stopPropagation();
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+};
+
+document.onclick = () => menu.style.display = "none";
+menu.onclick = e => e.stopPropagation();
+
+menu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    menu.style.display = "none";
+  });
+});
+</script>
+
+<!-- Media badge and play button styles -->
+<style>
+.media-badge {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.media-badge::before {
+  content: "📷";
+  font-size: 14px;
+}
+
+.media-badge.video::before {
+  content: "🎥";
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  z-index: 6;
+  cursor: pointer;
+  border: 3px solid rgba(255,255,255,0.8);
+  transition: all 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.play-button:hover {
+  background: #38bdf8;
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: white;
+}
+
+video {
+  background: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .play-button {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .media-badge {
+    padding: 4px 10px;
+    font-size: 11px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+</style>
+
+</body>
+</html>

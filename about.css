@@ -1,0 +1,64 @@
+/* About page specific styles */
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px 50px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #0b1120;
+  margin-bottom: 30px;
+  font-weight: 700;
+  border-bottom: 3px solid #38bdf8;
+  padding-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin: 40px 0 20px;
+  font-weight: 600;
+}
+
+p {
+  color: #334155;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+ul {
+  margin: 20px 0 30px 25px;
+  color: #334155;
+}
+
+li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+strong {
+  color: #0b1120;
+}
+
+/* Active menu highlight */
+.mobile-menu a.active {
+  background: #1e293b;
+  border-left: 3px solid #38bdf8;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  p, li {
+    font-size: 1rem;
+  }
+}
