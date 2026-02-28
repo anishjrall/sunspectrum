@@ -157,3 +157,8 @@ footer {
     font-size: 0.8rem;
   }
 }
+
+.mobile-menu a.active {
+  background: #1e293b;
+  border-left: 3px solid #38bdf8;
+}

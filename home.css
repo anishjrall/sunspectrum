@@ -9,47 +9,7 @@
         color: #1d4ed8;
         text-decoration: none;
       }
-      .menu-wrapper {
-        position: relative;
-      }
-
-      .hamburger {
-        background: none;
-        border: none;
-        font-size: 26px;
-        color: white;
-        cursor: pointer;
-      }
-
-      .mobile-menu {
-        position: absolute;
-        right: 0;
-        top: 45px;
-        background: #0b1120;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        display: none;
-        flex-direction: column;
-        min-width: 160px;
-        overflow: hidden;
-      }
-
-      .mobile-menu a {
-        padding: 12px 16px;
-        color: white;
-        text-decoration: none;
-        border-bottom: 1px solid #1e293b;
-        font-weight: 600;
-      }
-
-      .mobile-menu a:hover {
-        background: #1e293b;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+     
 
       body {
         font-family:
@@ -296,14 +256,7 @@
         display: block;
       }
 
-      footer {
-        text-align: center;
-        padding: 30px 20px;
-        background: #0b1120;
-        color: #a0afbe;
-        font-size: 1rem;
-        border-top: 1px solid #1e2a3a;
-      }
+   
 
       /* fixed whatsapp button */
       .whatsapp {
